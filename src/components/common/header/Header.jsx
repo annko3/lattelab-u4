@@ -62,6 +62,9 @@ function Header() {
                 <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
                   <Link to="/contact">Contacto</Link>
                 </li>
+                 <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
               </div>
               <div className="justify-start flex flex-wrap gap-[20px] text-white">
                 <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
