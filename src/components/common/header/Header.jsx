@@ -42,28 +42,32 @@ function Header() {
 
         <div className="bg-[#a9745c] text-center">
           <nav>
-            <ul className="flex gap-[20px] py-[10px] justify-center flex-wrap text-white">
-              <li className="hover:bg-beige hover:text-brown-pink p-2 rounded-2xl font-bold">
-                <Link to="/">Inicio</Link>
-              </li>
-              <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                <Link to="/aboutUs">Quienes Somos</Link>
-              </li>
-              <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                <Link to="/books">Libros</Link>
-              </li>
-              <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                <Link to="/talleres">Talleres</Link>
-              </li>
-              <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                <Link to="/menu">Menú</Link>
-              </li>
-              <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                <Link to="/contact">Contacto</Link>
-              <li>
-                  
+            <ul className="flex py-[10px] px-[20px] justify-between flex-wrap text-white">
+              <div className="justify-start flex flex-wrap gap-[20px] text-white">
+                <li className="hover:bg-beige hover:text-brown-pink p-2 rounded-2xl font-bold">
+                  <Link to="/">Inicio</Link>
                 </li>
-              </li>
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/aboutUs">Quienes Somos</Link>
+                </li>
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/books">Libros</Link>
+                </li>
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/talleres">Talleres</Link>
+                </li>
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/menu">Menú</Link>
+                </li>
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/contact">Contacto</Link>
+                </li>
+              </div>
+              <div className="justify-start flex flex-wrap gap-[20px] text-white">
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                  <Link to="/login">Iniciar Sesión</Link>
+                </li>
+              </div>
               
               
             </ul>

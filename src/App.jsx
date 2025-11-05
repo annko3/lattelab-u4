@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import Menu from "./pages/menu/Menu";
 import Contact from './pages/contact/Contact.jsx';
 import AboutUs from "./pages/aboutUs/AboutUs.jsx";
+import Login from './pages/login/Login.jsx';
 import Books from './pages/books/Books.jsx';
 import Talleres from "./pages/talleres/Talleres.jsx";
 import Header from './components/common/header/Header.jsx';
@@ -23,6 +24,7 @@ function App() {
               <Route path="/menu" element={<Menu />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/talleres" element={<Talleres />} />
+              <Route path='/login' element={<Login />}/>
             </Routes>
           </main>
 
