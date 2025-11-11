@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./pages/home/Home";
 import Menu from "./pages/menu/Menu";
+import ProductDetail from './pages/menu/ProductDetail';
 import Contact from './pages/contact/Contact.jsx';
 import AboutUs from "./pages/aboutUs/AboutUs.jsx";
 import Login from './pages/login/Login.jsx';
@@ -25,6 +26,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/talleres" element={<Talleres />} />
               <Route path='/login' element={<Login />}/>
+              <Route path="/product/:id" element={<ProductDetail />} />
             </Routes>
           </main>
 
