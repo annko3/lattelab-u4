@@ -7,32 +7,31 @@ import AboutUs from "./pages/aboutUs/AboutUs.jsx";
 import Login from './pages/login/Login.jsx';
 import Books from './pages/books/Books.jsx';
 import Talleres from "./pages/talleres/Talleres.jsx";
+import Dashboard from './pages/Dashboard.jsx';
 import Header from './components/common/header/Header.jsx';
 import Footer from './components/common/footer/Footer.jsx';
 
 function App() {
 
   return (
-      <Router>
-        <div className="App">
-          <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path='/books' element={<Books />}/>
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/talleres" element={<Talleres />} />
-              <Route path='/login' element={<Login />}/>
-            </Routes>
-          </main>
-
-          <Footer />
-        </div>
-
-        
-      </Router>
+    <Router>
+      <div className="App">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/books" element={<Books />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/talleres" element={<Talleres />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 

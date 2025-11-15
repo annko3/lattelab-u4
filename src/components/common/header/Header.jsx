@@ -63,12 +63,12 @@ function Header() {
                   <Link to="/contact">Contacto</Link>
                 </li>
                  <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to="/dashboard">Testimonios</Link>
                 </li>
               </div>
-              <div className="justify-start flex flex-wrap gap-[20px] text-white">
+            <div>
                 <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                  <Link to="/login">Iniciar Sesión</Link>
+                  <Link to="/login">Usuario</Link>
                 </li>
               </div>
               

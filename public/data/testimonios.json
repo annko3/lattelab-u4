@@ -4,43 +4,49 @@
     "nombre": "María López",
     "rol": "Cliente frecuente",
     "mensaje": "El mejor café que he probado. El ambiente es cálido y el servicio excelente.",
-    "imagen": "/src/assets/images/client1.png"
+    "imagen": "/src/assets/images/client1.png",
+    "estrellas": 5
   },
   {
     "id": 2,
     "nombre": "Carlos Méndez",
     "rol": "Amante del café",
     "mensaje": "Un lugar perfecto para relajarse y disfrutar un buen café con amigos.",
-    "imagen": "/src/assets/images/client2.png"
+    "imagen": "/src/assets/images/client2.png",
+    "estrellas": 4
   },
   {
     "id": 3,
     "nombre": "Sofía García",
     "rol": "Visitante regular",
     "mensaje": "Lattelab tiene los mejores granos y atención personalizada. 100% recomendado.",
-    "imagen": "/src/assets/images/client3.png"
+    "imagen": "/src/assets/images/client3.png",
+    "estrellas": 5
   },
-
+  
   {
     "id": 4,
     "nombre": "Hernán Dario",
     "rol": "Cliente regular",
     "mensaje": "Excelente lugar para disfrutar de un buen café y aprender sobre su preparación.",
-    "imagen": "/src/assets/images/client4.png"
+    "imagen": "/src/assets/images/client4.png",
+    "estrellas": 4
   },
   {
     "id": 5,
     "nombre": "Ana María",
     "rol": "Amante del café",
     "mensaje": "El ambiente es acogedor y el personal es muy amable. ¡Me encanta venir aquí!",
-    "imagen": "/src/assets/images/client5.png"
-  
-  },  {
+    "imagen": "/src/assets/images/client5.png",
+    "estrellas": 5
+  },
+  {
     "id": 6,
     "nombre": "Luis Fernando",
     "rol": "Cliente frecuente",
     "mensaje": "La variedad de cafés es impresionante. Siempre encuentro algo nuevo para probar.",
-    "imagen": "/src/assets/images/client6.png"
+    "imagen": "/src/assets/images/client6.png",
+    "estrellas": 4
   }
 
 ]
