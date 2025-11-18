@@ -123,10 +123,11 @@ function ProductDetail() {
       <section className="bg-background-alt text-brown-dark items-center">
         <h2 className="text-3xl font-bold text-brown-dark mb-3">Reseñas</h2>
 
+        <div className="flex flex-col md:flex-row gap-10">
         {canAddComment ? (
           <form
             onSubmit={handleCommentSubmit}
-            className="flex flex-col gap-5 p-6"
+            className="flex flex-col gap-5 md:w-1/1"
           >
             <textarea
               value={text}
@@ -146,26 +147,38 @@ function ProductDetail() {
           <p>Debes iniciar sesión para comentar.</p>
         )}
 
-        {comments.map((c) => {
-          const date = c.date?.toDate ? c.date.toDate() : new Date(c.date);
+        <div className="md:w-1/1 flex flex-col gap-7">
+          {comments.length === 0 ? (
+            <p className="text-gray-500 italic text-center">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+          ) : (
+            comments.map((c) => {
+            const date = c.date?.toDate ? c.date.toDate() : new Date(c.date);
 
-          return (
-            <div
-              key={c.id}
-              className="m-5 p-6 bg-background rounded-4xl border-2 border-brown-dark outset-border"
-            >
-              <div className="flex justify-between">
-                <strong>{c.userName}</strong>
-                {/* FECHA */}
-                <span className="text-sm text-gray-500">
-                  {date.toLocaleString()}
-                </span>
+            return (
+              <div
+                key={c.id}
+                className="p-6 bg-background rounded-4xl border-2 border-brown-dark outset-border"
+              >
+                <div className="flex justify-between">
+                  <strong className="text-xl text-brown-dark mb-3">{c.userName}</strong>
+                  {/* FECHA */}
+                  <span className="text-sm text-gray-500">
+                    {date.toLocaleString()}
+                  </span>
+                </div>
+
+                <p>{c.text}</p>
               </div>
+            );
 
-              <p>{c.text}</p>
-            </div>
-          );
-        })}
+            })
+          )}
+
+          
+        </div>
+
+        </div>
+
       </section>
     </>
   );
