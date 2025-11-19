@@ -1,13 +1,12 @@
 import { useState, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../firebase/config"; // agregamos db
+import { auth, db } from "../../firebase/config";
 import { UserContext } from "../../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore"; // para obtener datos de Firestore
+import { doc, getDoc } from "firebase/firestore";
 
 function Login() {
   const { setUser } = useContext(UserContext);
-  const [username, setUsername] = useState(""); // input de nombre de usuario
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,19 +18,18 @@ function Login() {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
 
-      // Traer nombre de usuario desde Firestore si el input está vacío
-      let finalUsername = username;
-      if (!finalUsername) {
-        const docRef = doc(db, "users", res.user.uid);
-        const docSnap = await getDoc(docRef);
-        finalUsername = docSnap.exists() ? docSnap.data().username : "";
-      }
+      // Obtener datos del usuario en Firestore
+      const docRef = doc(db, "users", res.user.uid);
+      const docSnap = await getDoc(docRef);
+      const username = docSnap.exists() ? docSnap.data().username : res.user.email;
 
-      setUser({ email: res.user.email, username: finalUsername });
+      // Guardar en contexto
+      setUser({ email: res.user.email, username });
+
       navigate("/testimonios");
     } catch (err) {
       console.log(err);
-      setError(err.message);
+      setError("Correo o contraseña incorrectos.");
     }
   }
 
@@ -40,7 +38,6 @@ function Login() {
       <div className="bg-brown-pink p-6 rounded-2xl text-white w-[350px]">
         <h2 className="text-3xl mb-4 font-bold text-center">Iniciar Sesión</h2>
 
-        {/* Tarjeta de demo */}
         <div className="bg-white text-brown-dark p-4 rounded-xl shadow-md mb-6">
           <h3 className="text-lg font-semibold mb-3 border-b pb-2">
             Credenciales de Demostración
@@ -59,22 +56,13 @@ function Login() {
           </div>
         </div>
 
-        {/* Formulario normal */}
         <form className="flex flex-col gap-3" onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Nombre de Usuario"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="px-3 py-2 rounded text-white"
-          />
-
           <input
             type="email"
             placeholder="Correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-3 py-2 rounded text-white"
+            className="px-3 py-2 rounded text-white border-1 border-white"
             required
           />
 
@@ -83,10 +71,11 @@ function Login() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="px-3 py-2 rounded text-white"
+            className="px-3 py-2 rounded text-white border-1 border-white"
             required
           />
-          <button className="bg-brown-dark py-2 px-4 rounded hover:bg-brown">
+
+          <button className="bg-brown-dark py-2 px-4 rounded cursor-pointer">
             Entrar
           </button>
         </form>

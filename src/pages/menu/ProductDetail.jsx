@@ -191,7 +191,7 @@ function ProductDetail() {
                         {canDeleteComment && (
                           <button
                             onClick={() => handleDeleteComment(c.id)}
-                            className="text-red-600 hover:text-red-800 text-sm font-semibold"
+                            className="text-red-600 hover:text-red-800 text-sm font-semibold cursor-pointer"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

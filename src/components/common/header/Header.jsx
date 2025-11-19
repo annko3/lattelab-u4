@@ -1,6 +1,22 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { auth } from "../../../firebase/config";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 function Header() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsub();
+  }, []);
+
+  function handleLogout() {
+    signOut(auth);
+  }
+
   return (
     <header className="bg-beige px-[5%] pt-[40px] pb-[10px]">
       <div className="header-container">
@@ -62,17 +78,25 @@ function Header() {
                 <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
                   <Link to="/contact">Contacto</Link>
                 </li>
-                 <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
+                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
                   <Link to="/dashboard">Testimonios</Link>
                 </li>
               </div>
-            <div>
-                <li className="hover:bg-beige hover:text-brown-pink hover:font-bold p-2 rounded-2xl font-bold">
-                  <Link to="/login">Usuario</Link>
-                </li>
+
+              <div>
+                {user ? (
+                  <li
+                    onClick={handleLogout}
+                    className="hover:bg-beige hover:text-brown-pink p-2 rounded-2xl font-bold cursor-pointer"
+                  >
+                    Cerrar Sesión
+                  </li>
+                ) : (
+                  <li className="hover:bg-beige hover:text-brown-pink p-2 rounded-2xl font-bold">
+                    <Link to="/login">Iniciar Sesión</Link>
+                  </li>
+                )}
               </div>
-              
-              
             </ul>
           </nav>
         </div>

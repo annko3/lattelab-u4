@@ -12,6 +12,7 @@ function Register() {
   const [username, setUsername] = useState(""); // nuevo input para nombre de usuario
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -24,6 +25,7 @@ function Register() {
       await setDoc(doc(db, "users", user.uid), {
         username: username,
         email: email,
+        role: "user",
         createdAt: new Date(),
       });
 
@@ -69,10 +71,12 @@ function Register() {
             required
           />
 
-          <button className="bg-brown-dark text-white px-4 py-2 rounded-lg hover:bg-brown">
+          <button className="bg-brown-dark text-white px-4 py-2 rounded-lg cursor-pointer">
             Registrarse
           </button>
         </form>
+
+        {error && <p className="text-red-400 mt-4">{error}</p>}
       </div>
     </section>
   );
