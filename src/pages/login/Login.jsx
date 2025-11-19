@@ -26,7 +26,7 @@ function Login() {
       // Guardar en contexto
       setUser({ email: res.user.email, username });
 
-      navigate("/testimonios");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
       setError("Correo o contraseña incorrectos.");

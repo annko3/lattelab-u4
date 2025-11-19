@@ -18,6 +18,7 @@ function ProductDetail() {
   const [role, setRole] = useState("guest");
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
+  
 
   // PRODUCTO
   useEffect(() => {
@@ -85,12 +86,18 @@ function ProductDetail() {
       return;
     }
 
+    // Obtener username desde Firestore
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const username = userSnap.exists() ? userSnap.data().username : "Usuario";
+
     await addDoc(collection(db, "products", id, "comments"), {
       text,
       userId: user.uid,
-      userName: user.displayName || "Usuario",
+      userName: username || "Usuario",
       date: new Date(),
     });
+
 
     setText("");
   }

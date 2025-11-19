@@ -44,15 +44,6 @@ function App() {
               }
             />
 
-            <Route
-              path="/testimonios"
-              element={
-                <PrivateRoute>
-                  <Testimonios />
-                </PrivateRoute>
-              }
-            />
-
             <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
         </main>
