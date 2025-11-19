@@ -1,12 +1,13 @@
-// src/pages/login/Login.jsx
 import { useState, useContext } from "react";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../../firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase/config"; // agregamos db
 import { UserContext } from "../../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore"; // para obtener datos de Firestore
 
 function Login() {
   const { setUser } = useContext(UserContext);
+  const [username, setUsername] = useState(""); // input de nombre de usuario
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,24 +18,20 @@ function Login() {
 
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      setUser({ email: res.user.email });
+
+      // Traer nombre de usuario desde Firestore si el input está vacío
+      let finalUsername = username;
+      if (!finalUsername) {
+        const docRef = doc(db, "users", res.user.uid);
+        const docSnap = await getDoc(docRef);
+        finalUsername = docSnap.exists() ? docSnap.data().username : "";
+      }
+
+      setUser({ email: res.user.email, username: finalUsername });
       navigate("/testimonios");
     } catch (err) {
       console.log(err);
       setError(err.message);
-      
-    }
-  }
-
-  async function handleGoogleLogin() {
-    try {
-      const res = await signInWithPopup(auth, googleProvider);
-      setUser({ email: res.user.email });
-      navigate("/testimonios");
-    } catch (err) {
-
-      console.log(err);
-      setError("Error al iniciar sesión con Google");
     }
   }
 
@@ -62,24 +59,22 @@ function Login() {
           </div>
         </div>
 
-        {/* Botón de Google */}
-        <div className="flex flex-col gap-2 mb-4">
-          <button
-            onClick={handleGoogleLogin}
-            className="bg-white text-brown-pink rounded px-4 py-2 hover:bg-gray-200"
-          >
-            Ingresar con Google
-          </button>
-        </div>
-
         {/* Formulario normal */}
         <form className="flex flex-col gap-3" onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Nombre de Usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="px-3 py-2 rounded text-white"
+          />
+
           <input
             type="email"
             placeholder="Correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="px-3 py-2 rounded text-black"
+            className="px-3 py-2 rounded text-white"
             required
           />
 
@@ -88,7 +83,7 @@ function Login() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="px-3 py-2 rounded text-black"
+            className="px-3 py-2 rounded text-white"
             required
           />
           <button className="bg-brown-dark py-2 px-4 rounded hover:bg-brown">

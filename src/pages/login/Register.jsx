@@ -1,13 +1,15 @@
 import { useState, useContext } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config"; // <--- agregamos db
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
+import { doc, setDoc } from "firebase/firestore"; // <--- para guardar en Firestore
 
 function Register() {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const [username, setUsername] = useState(""); // nuevo input para nombre de usuario
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,7 +18,16 @@ function Register() {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      setUser({ email: res.user.email });
+      const user = res.user;
+
+      // Guardar en Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        username: username,
+        email: email,
+        createdAt: new Date(),
+      });
+
+      setUser({ email: res.user.email, username: username });
       navigate("/testimonios");
     } catch (err) {
       console.log(err);
@@ -32,11 +43,20 @@ function Register() {
         <form onSubmit={handleRegister} className="flex flex-col gap-3">
 
           <input
+            type="text"
+            placeholder="Nombre de usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="border px-3 py-2 rounded text-white"
+            required
+          />
+
+          <input
             type="email"
             placeholder="Correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border px-3 py-2 rounded text-black"
+            className="border px-3 py-2 rounded text-white"
             required
           />
 
@@ -45,7 +65,7 @@ function Register() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border px-3 py-2 rounded text-black"
+            className="border px-3 py-2 rounded text-white"
             required
           />
 
