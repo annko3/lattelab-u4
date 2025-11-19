@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth} from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCVYM0yxxwUNlENawbyXHKj7MvD9NLFM",
-  authDomain: "lattelab-u4-1b17f.firebaseapp.com",
-  projectId: "lattelab-u4-1b17f",
-  storageBucket: "lattelab-u4-1b17f.appspot.com",
-  messagingSenderId: "178387692424",
-  appId: "1:178387692424:web:30378569afc56918a945"
+  apiKey: "AIzaSyCM9Qxuu0rvnlBCNUahBwyXHKjMVb9NLFM",
+  authDomain: "lattelab-u4-1b1f7.firebaseapp.com",
+  projectId: "lattelab-u4-1b1f7",
+  storageBucket: "lattelab-u4-1b1f7.firebasestorage.app",
+  messagingSenderId: "783687292704",
+  appId: "1:783687292704:web:b3c7b7859efc5e5918a945"
 };
 
 // Inicializar Firebase
