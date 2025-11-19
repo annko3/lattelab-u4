@@ -30,7 +30,7 @@ function Register() {
       });
 
       setUser({ email: res.user.email, username: username });
-      navigate("/testimonios");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
       setError(err.message);

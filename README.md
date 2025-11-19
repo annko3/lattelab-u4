@@ -52,12 +52,6 @@ Proyecto desarrollado por:
       <a href="https://github.com/annko3">GitHub</a>
     </td>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/222116043?v=4" width="100px;" alt=""/><br />
-      <sub><b>Tatiana Marin</b></sub><br />
-      ⚙️ Front Developer <br />
-      <a href="https://github.com/tatiana-alt">GitHub</a>
-    </td>
-    <td align="center">
       <img src="https://avatars.githubusercontent.com/u/227622879?v=4" width="100px;" alt=""/><br />
       <sub><b>Alisson Gonzales/b></sub><br />
       ⚙️ Front Developer <br />

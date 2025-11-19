@@ -10,7 +10,6 @@ import Register from './pages/login/Register.jsx';
 import Books from './pages/books/Books.jsx';
 import Talleres from "./pages/talleres/Talleres.jsx";
 import Dashboard from './pages/Dashboard.jsx';
-import Testimonios from "./components/Testimonios.jsx";
 import Header from './components/common/header/Header.jsx';
 import Footer from './components/common/footer/Footer.jsx';
 import PrivateRoute from "./components/PrivateRoute.jsx";
