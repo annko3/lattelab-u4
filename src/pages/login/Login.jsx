@@ -1,31 +1,49 @@
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
-import { Link } from "react-router-dom";
+// src/pages/login/Login.jsx
+import { useState, useContext } from "react";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase/config";
+import { UserContext } from "../../contexts/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function handleLogin(e) {
     e.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setError("");
-      alert("Inicio de sesión exitoso");
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      setUser({ email: res.user.email });
+      navigate("/testimonios");
     } catch (err) {
-      setError("Correo o contraseña incorrectos");
       console.log(err);
+      setError(err.message);
+      
+    }
+  }
+
+  async function handleGoogleLogin() {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      setUser({ email: res.user.email });
+      navigate("/testimonios");
+    } catch (err) {
+
+      console.log(err);
+      setError("Error al iniciar sesión con Google");
     }
   }
 
   return (
-    <section className="bg-background text-brown-dark items-center text-center flex flex-col gap-9">
-      <div className="md:w-1/2 bg-brown-pink text-white p-6 rounded-2xl">
-        <h2 className="text-3xl font-bold mb-5">Iniciar Sesión</h2>
+    <section className="flex flex-col items-center justify-center min-h-[80vh] gap-6">
+      <div className="bg-brown-pink p-6 rounded-2xl text-white w-[350px]">
+        <h2 className="text-3xl mb-4 font-bold text-center">Iniciar Sesión</h2>
 
+        {/* Tarjeta de demo */}
         <div className="bg-white text-brown-dark p-4 rounded-xl shadow-md mb-6">
           <h3 className="text-lg font-semibold mb-3 border-b pb-2">
             Credenciales de Demostración
@@ -44,16 +62,24 @@ function Login() {
           </div>
         </div>
 
-        <form
-          onSubmit={handleLogin}
-          className="flex flex-col items-center gap-3"
-        >
+        {/* Botón de Google */}
+        <div className="flex flex-col gap-2 mb-4">
+          <button
+            onClick={handleGoogleLogin}
+            className="bg-white text-brown-pink rounded px-4 py-2 hover:bg-gray-200"
+          >
+            Ingresar con Google
+          </button>
+        </div>
+
+        {/* Formulario normal */}
+        <form className="flex flex-col gap-3" onSubmit={handleLogin}>
           <input
             type="email"
             placeholder="Correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border px-3 py-2 rounded "
+            className="px-3 py-2 rounded text-black"
             required
           />
 
@@ -62,22 +88,21 @@ function Login() {
             placeholder="Contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border px-3 py-2 rounded"
+            className="px-3 py-2 rounded text-black"
             required
           />
-
-          <button
-            type="submit"
-            className="bg-brown-dark text-white px-4 py-2 rounded-lg hover:bg-brown"
-          >
+          <button className="bg-brown-dark py-2 px-4 rounded hover:bg-brown">
             Entrar
           </button>
         </form>
 
-        {error && <p className="text-red-600 mt-3">{error}</p>}
+        {error && <p className="text-red-500 mt-2">{error}</p>}
 
-        <p className="mt-5 border-t-1">¿No tienes cuenta?</p>
-        <Link to="/register" className="text-blue-500 mt-5 block">
+        <p className="mt-4 text-center">¿No tienes cuenta?</p>
+        <Link
+          to="/register"
+          className="text-blue-500 block text-center mt-1 hover:underline"
+        >
           Crear una Cuenta
         </Link>
       </div>

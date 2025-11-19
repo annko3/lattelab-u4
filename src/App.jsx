@@ -6,11 +6,14 @@ import ProductDetail from './pages/menu/ProductDetail';
 import Contact from './pages/contact/Contact.jsx';
 import AboutUs from "./pages/aboutUs/AboutUs.jsx";
 import Login from './pages/login/Login.jsx';
+import Register from './pages/login/Register.jsx';
 import Books from './pages/books/Books.jsx';
 import Talleres from "./pages/talleres/Talleres.jsx";
 import Dashboard from './pages/Dashboard.jsx';
+import Testimonios from "./components/Testimonios.jsx";
 import Header from './components/common/header/Header.jsx';
 import Footer from './components/common/footer/Footer.jsx';
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 function App() {
   return (
@@ -26,8 +29,30 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/talleres" element={<Talleres />} />
+
+            {/* LOGIN & REGISTER */}
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* PROTEGIDO */}
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/testimonios"
+              element={
+                <PrivateRoute>
+                  <Testimonios />
+                </PrivateRoute>
+              }
+            />
+
             <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
         </main>
